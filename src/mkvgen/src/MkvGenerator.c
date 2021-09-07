@@ -684,12 +684,13 @@ STATUS mkvgenValidateFrame(PStreamMkvGenerator pStreamMkvGenerator, PFrame pFram
     CHK(pFrame->size > 0 && pFrame->frameData != NULL && pFrame->trackId == pTrackInfo->trackId, STATUS_MKV_INVALID_FRAME_DATA);
 
     // Calculate the timestamp - based on in stream or current time
-    if (pStreamMkvGenerator->streamTimestamps) {
-        dts = pFrame->decodingTs;
-        pts = pFrame->presentationTs;
-    } else {
-        pts = dts = pStreamMkvGenerator->getTimeFn(pStreamMkvGenerator->customData);
-    }
+    // if (pStreamMkvGenerator->streamTimestamps) {
+    //     dts = pFrame->decodingTs;
+    //     pts = pFrame->presentationTs;
+    // } else {
+    //     pts = dts = pStreamMkvGenerator->getTimeFn(pStreamMkvGenerator->customData);
+    // }
+    pts = dts = pFrame->presentationTs;
 
     duration = pFrame->duration;
 
